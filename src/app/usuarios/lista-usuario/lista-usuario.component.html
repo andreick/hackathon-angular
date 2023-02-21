@@ -1,1 +1,19 @@
-<p>lista-usuario works!</p>
+<p-table [value]="usuarios" [rowHover]="true">
+    <ng-template pTemplate="caption">
+        Lista de Usuários
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of colunas">
+                {{col.cabecalho}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-usuario>
+        <tr>
+            <td *ngFor="let col of colunas">
+                {{usuario[col.campo]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

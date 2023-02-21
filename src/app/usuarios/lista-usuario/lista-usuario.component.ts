@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Usuario } from '../interface/usuario';
+import { UsuarioService } from '../service/usuario.service';
+
 @Component({
   selector: 'app-lista-usuario',
   templateUrl: './lista-usuario.component.html',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaUsuarioComponent implements OnInit {
 
-  constructor() { }
+  usuarios: Usuario[] = []
+
+  colunas: { cabecalho: string, campo: string }[]
+
+  constructor(private service: UsuarioService) { }
 
   ngOnInit(): void {
+    this.service.listarUsuarios().subscribe((usuarios) => this.usuarios = usuarios)
+
+    this.colunas = [
+      { cabecalho: 'Id', campo: 'id' },
+      { cabecalho: 'Nome', campo: 'nome' },
+      { cabecalho: 'Email', campo: 'email' },
+      { cabecalho: 'Data de Nascimento', campo: 'dataNascimento' }
+    ];
   }
 
 }

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { TableModule } from 'primeng/table';
+
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { ListaUsuarioComponent } from './lista-usuario/lista-usuario.component';
 
@@ -8,7 +10,8 @@ import { ListaUsuarioComponent } from './lista-usuario/lista-usuario.component';
   declarations: [ListaUsuarioComponent],
   imports: [
     CommonModule,
-    UsuariosRoutingModule
+    UsuariosRoutingModule,
+    TableModule,
   ],
   exports: [
     ListaUsuarioComponent
