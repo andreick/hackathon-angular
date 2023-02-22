@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -16,6 +17,7 @@ import { FormularioUsuarioComponent } from './formulario-usuario/formulario-usua
   imports: [
     CommonModule,
     UsuariosRoutingModule,
+    ReactiveFormsModule,
     TableModule,
     ButtonModule,
     CardModule,

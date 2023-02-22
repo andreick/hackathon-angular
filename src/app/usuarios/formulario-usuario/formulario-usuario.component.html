@@ -4,33 +4,57 @@
             <div class="flex justify-content-center">
                 <div class="text-3xl">Cadastro de Usuário</div>
             </div>
-            <div class="p-fluid grid my-6">
+            <form [formGroup]="formulario" class="p-fluid grid my-6">
                 <div class="field col-12 md:col-6">
                     <label for="nome">Nome</label>
-                    <input id="nome" pInputText />
+                    <input id="nome" type="text" formControlName="nome" pInputText />
+                    <div *ngIf="isTouched(nome)">
+                        <small *ngIf="isBlank(nome)" class="p-invalid">Campo obrigatório</small>
+                        <small *ngIf="hasWrongLength(nome)" class="p-invalid">O nome deve possuir no máximo 50
+                            caracteres</small>
+                    </div>
                 </div>
                 <div class="field col-12 md:col-6">
                     <label for="email">Email</label>
-                    <input id="email" pInputText />
+                    <input id="email" type="email" formControlName="email" pInputText />
+                    <div *ngIf="isTouched(email)">
+                        <small *ngIf="isBlank(email)" class="p-invalid">Campo obrigatório</small>
+                        <small *ngIf="isNotEmail(email)" class="p-invalid">Email inválido</small>
+                        <small *ngIf="hasWrongLength(email) && !isNotEmail(email)" class="p-invalid">O email deve
+                            possuir no mínimo 10 caracteres</small>
+                    </div>
                 </div>
                 <div class="field col-12 md:col-6">
                     <label for="data-nascimento">Data de Nascimento</label>
-                    <p-calendar id="data-nascimento"></p-calendar>
+                    <p-calendar id="data-nascimento" formControlName="dataNascimento" dateFormat="dd/mm/yy"
+                        yearNavigator="true" monthNavigator="true" showIcon="true" yearRange="1900:2030"
+                        [maxDate]="ontem"></p-calendar>
                 </div>
                 <div class="field col-12 md:col-6">
                 </div>
                 <div class="field col-12 md:col-6">
                     <label for="login">Login</label>
-                    <input id="login" pInputText />
+                    <input id="login" type="text" formControlName="login" pInputText />
+                    <div *ngIf="isTouched(login)">
+                        <small *ngIf="isBlank(login)" class="p-invalid">Campo obrigatório</small>
+                        <small *ngIf="hasWrongLength(login)" class="p-invalid">O login deve possuir entre 5 a 20
+                            caracteres</small>
+                    </div>
                 </div>
                 <div class="field col-12 md:col-6">
                     <label for="senha">Senha</label>
-                    <input id="senha" pInputText />
+                    <input id="senha" type="password" formControlName="senha" pInputText />
+                    <div *ngIf="isTouched(senha)">
+                        <small *ngIf="isBlank(senha)" class="p-invalid">Campo obrigatório</small>
+                        <small *ngIf="hasWrongLength(senha)" class="p-invalid">A senha deve possuir entre 4 a 10
+                            caracteres</small>
+                    </div>
                 </div>
-            </div>
+            </form>
             <div class="flex justify-content-evenly gap-3">
-                <button pButton type="button" label="Cadastrar" class="w-6 md:w-5 lg:w-4 xl:w-3"></button>
-                <button pButton type="button" label="Cancelar"
+                <button pButton type="button" label="Cadastrar" (click)="enviar()" [disabled]="!formulario.valid"
+                    class="w-6 md:w-5 lg:w-4 xl:w-3"></button>
+                <button pButton type="button" label="Cancelar" (click)="voltar()"
                     class="p-button-danger w-6 md:w-5 lg:w-4 xl:w-3"></button>
             </div>
         </div>
