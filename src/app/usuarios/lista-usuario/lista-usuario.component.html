@@ -1,6 +1,9 @@
-<p-table [value]="usuarios" [rowHover]="true">
+<p-table [value]="usuarios" rowHover="true" styleClass="p-datatable-lg p-datatable-gridlines p-datatable-striped">
     <ng-template pTemplate="caption">
-        Lista de Usuários
+        <div class="flex justify-content-between">
+            <div class="text-xl">Lista de Usuários</div>
+            <p-button routerLink="criar" label="Cadastrar Usuário" icon="pi pi-plus"></p-button>
+        </div>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>

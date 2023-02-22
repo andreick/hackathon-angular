@@ -1,0 +1,38 @@
+<p-card>
+    <div class="flex justify-content-center">
+        <div class="w-12 md:w-11 lg:w-10 xl:w-9">
+            <div class="flex justify-content-center">
+                <div class="text-3xl">Cadastro de Usuário</div>
+            </div>
+            <div class="p-fluid grid my-6">
+                <div class="field col-12 md:col-6">
+                    <label for="nome">Nome</label>
+                    <input id="nome" pInputText />
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="email">Email</label>
+                    <input id="email" pInputText />
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="data-nascimento">Data de Nascimento</label>
+                    <p-calendar id="data-nascimento"></p-calendar>
+                </div>
+                <div class="field col-12 md:col-6">
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="login">Login</label>
+                    <input id="login" pInputText />
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label for="senha">Senha</label>
+                    <input id="senha" pInputText />
+                </div>
+            </div>
+            <div class="flex justify-content-evenly gap-3">
+                <button pButton type="button" label="Cadastrar" class="w-6 md:w-5 lg:w-4 xl:w-3"></button>
+                <button pButton type="button" label="Cancelar"
+                    class="p-button-danger w-6 md:w-5 lg:w-4 xl:w-3"></button>
+            </div>
+        </div>
+    </div>
+</p-card>
