@@ -5,7 +5,8 @@ import { ListaUsuarioComponent } from './lista-usuario/lista-usuario.component';
 
 const routes: Routes = [
   { path: '', component: ListaUsuarioComponent },
-  { path: 'criar', component: FormularioUsuarioComponent },
+  { path: 'cadastrar', component: FormularioUsuarioComponent },
+  { path: 'atualizar/:id', component: FormularioUsuarioComponent },
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { FormularioUsuario } from '../service/interface/formulario-usuario';
 import { UsuarioService } from '../service/usuario.service';
@@ -14,23 +14,36 @@ import { notBlankValidator } from 'src/app/validators/not-blank.validator';
 })
 export class FormularioUsuarioComponent implements OnInit {
 
+  id: number
   formulario: FormGroup
-
-  ontem = getYesterday(new Date())
+  ontem: Date = getYesterday(new Date())
 
   constructor(
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
     private service: UsuarioService
   ) { }
 
   ngOnInit(): void {
+    const idParam = this.route.snapshot.paramMap.get('id')
+    if (idParam) {
+      this.id = Number(idParam)
+      this.service.buscarPorId(this.id).subscribe((usuario) => {
+        this.nome?.setValue(usuario.nome)
+        this.email?.setValue(usuario.email)
+        this.dataNascimento?.setValue(new Date(usuario.dataNascimento))
+        this.formulario.removeControl('login')
+        this.formulario.removeControl('senha')
+      })
+    }
+
     this.formulario = this.formBuilder.group({
-      nome: ['Julia', Validators.compose([notBlankValidator(), Validators.maxLength(50)])],
-      email: ['julia@gmail.com', Validators.compose([notBlankValidator(), Validators.minLength(10), Validators.email])],
+      nome: ['', Validators.compose([notBlankValidator(), Validators.maxLength(50)])],
+      email: ['', Validators.compose([notBlankValidator(), Validators.minLength(10), Validators.email])],
       dataNascimento: [null],
-      login: ['julia', Validators.compose([notBlankValidator(), Validators.minLength(5), Validators.maxLength(20)])],
-      senha: ['julia', Validators.compose([notBlankValidator(), Validators.minLength(4), Validators.maxLength(10)])]
+      login: ['', Validators.compose([notBlankValidator(), Validators.minLength(5), Validators.maxLength(20)])],
+      senha: ['', Validators.compose([notBlankValidator(), Validators.minLength(4), Validators.maxLength(10)])]
     })
   }
 
@@ -59,7 +72,11 @@ export class FormularioUsuarioComponent implements OnInit {
 
   enviar() {
     const formularioUsuario = this.formulario.value as FormularioUsuario
-    this.service.criarUsuario(formularioUsuario).subscribe(() => this.voltar(), (error) => console.error(error))
+    if (this.id) {
+      this.service.atualizarUsuario(this.id, formularioUsuario).subscribe(() => this.voltar(), (error) => console.error(error))
+    } else {
+      this.service.criarUsuario(formularioUsuario).subscribe(() => this.voltar(), (error) => console.error(error))
+    }
   }
 
   voltar() {

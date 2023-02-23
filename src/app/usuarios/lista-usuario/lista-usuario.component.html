@@ -2,7 +2,8 @@
     <ng-template pTemplate="caption">
         <div class="flex justify-content-between">
             <div class="text-xl">Lista de Usuários</div>
-            <p-button routerLink="criar" label="Cadastrar Usuário" icon="pi pi-plus"></p-button>
+            <button pButton label="Cadastrar" icon="pi pi-user-plus" class="p-button-success"
+                routerLink="cadastrar"></button>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -10,12 +11,19 @@
             <th *ngFor="let col of colunas">
                 {{col.cabecalho}}
             </th>
+            <th class="text-center">Ações</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-usuario>
         <tr>
             <td *ngFor="let col of colunas">
                 {{usuario[col.campo]}}
+            </td>
+            <td class="flex justify-content-center gap-3">
+                <button pButton icon="pi pi-user-edit" class="p-button-rounded p-button-success"
+                    routerLink="atualizar/{{usuario.id}}"></button>
+                <button pButton icon="pi pi-user-minus" class="p-button-rounded p-button-danger"
+                    routerLink="excluir"></button>
             </td>
         </tr>
     </ng-template>

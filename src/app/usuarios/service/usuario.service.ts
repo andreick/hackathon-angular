@@ -24,4 +24,18 @@ export class UsuarioService {
   criarUsuario(usuario: FormularioUsuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.API, usuario)
   }
+
+  atualizarUsuario(id: number, usuario: FormularioUsuario): Observable<Usuario> {
+    const url = this.formarUrl(id)
+    return this.http.put<Usuario>(url, usuario)
+  }
+
+  buscarPorId(id: number): Observable<Usuario> {
+    const url = this.formarUrl(id)
+    return this.http.get<Usuario>(url)
+  }
+
+  private formarUrl(id: number): string {
+    return `${this.API}/${id}`
+  }
 }
