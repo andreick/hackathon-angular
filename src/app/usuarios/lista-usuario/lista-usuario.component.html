@@ -23,8 +23,19 @@
                 <button pButton icon="pi pi-user-edit" class="p-button-rounded p-button-success"
                     routerLink="atualizar/{{usuario.id}}"></button>
                 <button pButton icon="pi pi-user-minus" class="p-button-rounded p-button-danger"
-                    routerLink="excluir"></button>
+                    (click)="excluirUsuario(usuario)"></button>
             </td>
         </tr>
     </ng-template>
 </p-table>
+
+<p-confirmDialog header="Exclusão" icon="pi pi-exclamation-triangle" #cd>
+    <p-footer>
+        <button pButton label="Sim" icon="pi pi-check" class="p-button-text p-button-primary"
+            (click)="cd.accept()"></button>
+        <button pButton label="Não" icon="pi pi-times" class="p-button-text p-button-danger"
+            (click)="cd.reject()"></button>
+    </p-footer>
+</p-confirmDialog>
+
+<p-toast position="top-center"></p-toast>

@@ -7,6 +7,8 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { ListaUsuarioComponent } from './lista-usuario/lista-usuario.component';
@@ -23,6 +25,8 @@ import { FormularioUsuarioComponent } from './formulario-usuario/formulario-usua
     CardModule,
     InputTextModule,
     CalendarModule,
+    ConfirmDialogModule,
+    ToastModule,
   ],
   exports: [
     ListaUsuarioComponent

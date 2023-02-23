@@ -30,6 +30,11 @@ export class UsuarioService {
     return this.http.put<Usuario>(url, usuario)
   }
 
+  excluirUsuario(id: number): Observable<void> {
+    const url = this.formarUrl(id)
+    return this.http.delete<void>(url)
+  }
+
   buscarPorId(id: number): Observable<Usuario> {
     const url = this.formarUrl(id)
     return this.http.get<Usuario>(url)

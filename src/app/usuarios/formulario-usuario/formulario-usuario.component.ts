@@ -6,6 +6,8 @@ import { FormularioUsuario } from '../service/interface/formulario-usuario';
 import { UsuarioService } from '../service/usuario.service';
 import { getYesterday } from 'src/app/utils/get-yesterday';
 import { notBlankValidator } from 'src/app/validators/not-blank.validator';
+import { MessageService } from 'primeng/api';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-formulario-usuario',
@@ -29,7 +31,8 @@ export class FormularioUsuarioComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
-    private service: UsuarioService
+    private service: UsuarioService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -73,11 +76,19 @@ export class FormularioUsuarioComponent implements OnInit {
 
   enviar() {
     const formularioUsuario = this.formulario.value as FormularioUsuario
+    let observable: Observable<any>
+    let acao: string
     if (this.id) {
-      this.service.atualizarUsuario(this.id, formularioUsuario).subscribe(() => this.voltar(), (error) => console.error(error))
+      observable = this.service.atualizarUsuario(this.id, formularioUsuario)
+      acao = 'Atualizado'
     } else {
-      this.service.criarUsuario(formularioUsuario).subscribe(() => this.voltar(), (error) => console.error(error))
+      observable = this.service.criarUsuario(formularioUsuario)
+      acao = 'Cadastrado'
     }
+    observable.subscribe(() => {
+      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: `Usuário ${acao}`, life: 2000 })
+      this.voltar()
+    })
   }
 
   voltar() {
