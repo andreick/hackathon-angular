@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { FormularioUsuario } from '../service/interface/formulario-usuario';
@@ -14,8 +14,15 @@ import { notBlankValidator } from 'src/app/validators/not-blank.validator';
 })
 export class FormularioUsuarioComponent implements OnInit {
 
-  id: number
-  formulario: FormGroup
+  id?: number
+
+  formulario!: FormGroup
+  get nome() { return this.formulario.get('nome') }
+  get email() { return this.formulario.get('email') }
+  get dataNascimento() { return this.formulario.get('dataNascimento') }
+  get login() { return this.formulario.get('login') }
+  get senha() { return this.formulario.get('senha') }
+
   ontem: Date = getYesterday(new Date())
 
   constructor(
@@ -47,26 +54,20 @@ export class FormularioUsuarioComponent implements OnInit {
     })
   }
 
-  get nome() { return this.formulario.get('nome') }
-  get email() { return this.formulario.get('email') }
-  get dataNascimento() { return this.formulario.get('dataNascimento') }
-  get login() { return this.formulario.get('login') }
-  get senha() { return this.formulario.get('senha') }
-
-  isTouched(control: AbstractControl) {
+  isTouched(control: AbstractControl | null) {
     return control?.touched
   }
 
-  isBlank(control: AbstractControl) {
+  isBlank(control?: AbstractControl | null) {
     return control?.errors?.['notBlank']
   }
 
-  hasWrongLength(control: AbstractControl) {
+  hasWrongLength(control?: AbstractControl | null) {
     const errors = control?.errors
     return errors?.['minlength'] || errors?.['maxlength']
   }
 
-  isNotEmail(control: AbstractControl) {
+  isNotEmail(control?: AbstractControl | null) {
     return control?.errors?.['email']
   }
 

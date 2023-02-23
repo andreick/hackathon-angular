@@ -12,7 +12,7 @@ export class ListaUsuarioComponent implements OnInit {
 
   usuarios: Usuario[] = []
 
-  colunas: { cabecalho: string, campo: string }[]
+  colunas!: { cabecalho: string, campo: string }[]
 
   constructor(private service: UsuarioService) { }
 

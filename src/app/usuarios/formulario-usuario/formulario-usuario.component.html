@@ -26,7 +26,7 @@
             <div class="field col-12 md:col-6">
                 <label for="data-nascimento">Data de Nascimento</label>
                 <p-calendar id="data-nascimento" formControlName="dataNascimento" dateFormat="dd/mm/yy"
-                    yearNavigator="true" monthNavigator="true" showIcon="true" yearRange="1900:2030"
+                    [yearNavigator]="true" [monthNavigator]="true" [showIcon]="true" yearRange="1900:2030"
                     [maxDate]="ontem"></p-calendar>
             </div>
             <div class="field col-12 md:col-6">
