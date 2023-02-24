@@ -93,6 +93,6 @@ export class FormularioUsuarioComponent implements OnInit {
   }
 
   voltar(): void {
-    this.router.navigate([''])
+    this.router.navigate(['usuarios'])
   }
 }

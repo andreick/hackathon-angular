@@ -5,13 +5,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
 
 import { ToastModule } from 'primeng/toast';
+import { TabMenuModule } from 'primeng/tabmenu';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CabecalhoComponent
   ],
   imports: [
     BrowserModule,
@@ -19,6 +22,7 @@ import { MessageService, ConfirmationService } from 'primeng/api';
     AppRoutingModule,
     HttpClientModule,
     ToastModule,
+    TabMenuModule,
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
