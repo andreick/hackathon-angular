@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
@@ -38,6 +38,11 @@ export class UsuarioService {
   buscarPorId(id: number): Observable<Usuario> {
     const url = this.formarUrl(id)
     return this.http.get<Usuario>(url)
+  }
+
+  buscarPorNome(nome: string): Observable<Usuario[]> {
+    let params = new HttpParams().set('nome_comeca_com', nome.trim())
+    return this.http.get<Usuario[]>(this.API, { params })
   }
 
   private formarUrl(id: number): string {

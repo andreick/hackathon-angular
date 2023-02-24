@@ -2,8 +2,14 @@
     <ng-template pTemplate="caption">
         <div class="flex justify-content-between">
             <div class="text-xl">Lista de Usuários</div>
-            <button pButton label="Cadastrar" icon="pi pi-user-plus" class="p-button-success"
-                routerLink="cadastrar"></button>
+            <div class="flex gap-3">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Pesquisar..." (keyup)="pesquisarPorNome($event)" />
+                </span>
+                <button pButton label="Cadastrar" icon="pi pi-user-plus" class="p-button-success"
+                    routerLink="cadastrar"></button>
+            </div>
         </div>
     </ng-template>
     <ng-template pTemplate="header">

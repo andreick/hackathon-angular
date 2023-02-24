@@ -36,6 +36,11 @@ export class ListaUsuarioComponent implements OnInit {
     this.usuarioService.listar().subscribe((usuarios) => this.usuarios = usuarios)
   }
 
+  pesquisarPorNome(event: Event): void {
+    const value = (event.target as HTMLInputElement).value
+    this.usuarioService.buscarPorNome(value).subscribe((usuarios) => this.usuarios = usuarios)
+  }
+
   excluirUsuario(usuario: Usuario): void {
     this.confirmationService.confirm({
       message: 'Tem certeza de que deseja excluir ' + usuario.nome + '?',
