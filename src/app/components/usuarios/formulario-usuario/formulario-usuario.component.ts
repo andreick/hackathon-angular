@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { FormularioUsuario } from '../service/interface/formulario-usuario';
-import { UsuarioService } from '../service/usuario.service';
+import { FormularioUsuario } from 'src/app/domain/usuario/formulario-usuario';
+import { UsuarioService } from 'src/app/service/usuario/usuario.service';
+import { notBlankValidator } from 'src/app/validator/not-blank.validator';
 import { getYesterday } from 'src/app/utils/get-yesterday';
-import { notBlankValidator } from 'src/app/validators/not-blank.validator';
+
 import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 
@@ -31,7 +32,7 @@ export class FormularioUsuarioComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
-    private service: UsuarioService,
+    private usuarioService: UsuarioService,
     private messageService: MessageService
   ) { }
 
@@ -39,7 +40,7 @@ export class FormularioUsuarioComponent implements OnInit {
     const idParam = this.route.snapshot.paramMap.get('id')
     if (idParam) {
       this.id = Number(idParam)
-      this.service.buscarPorId(this.id).subscribe((usuario) => {
+      this.usuarioService.buscarPorId(this.id).subscribe((usuario) => {
         this.nome?.setValue(usuario.nome)
         this.email?.setValue(usuario.email)
         this.dataNascimento?.setValue(new Date(usuario.dataNascimento))
@@ -57,32 +58,32 @@ export class FormularioUsuarioComponent implements OnInit {
     })
   }
 
-  isTouched(control: AbstractControl | null) {
+  isTouched(control: AbstractControl | null): boolean | undefined {
     return control?.touched
   }
 
-  isBlank(control?: AbstractControl | null) {
+  isBlank(control?: AbstractControl | null): boolean {
     return control?.errors?.['notBlank']
   }
 
-  hasWrongLength(control?: AbstractControl | null) {
+  hasWrongLength(control?: AbstractControl | null): boolean {
     const errors = control?.errors
     return errors?.['minlength'] || errors?.['maxlength']
   }
 
-  isNotEmail(control?: AbstractControl | null) {
+  isNotEmail(control?: AbstractControl | null): boolean {
     return control?.errors?.['email']
   }
 
-  enviar() {
+  enviar(): void {
     const formularioUsuario = this.formulario.value as FormularioUsuario
     let observable: Observable<any>
     let acao: string
     if (this.id) {
-      observable = this.service.atualizarUsuario(this.id, formularioUsuario)
+      observable = this.usuarioService.atualizar(this.id, formularioUsuario)
       acao = 'Atualizado'
     } else {
-      observable = this.service.criarUsuario(formularioUsuario)
+      observable = this.usuarioService.criar(formularioUsuario)
       acao = 'Cadastrado'
     }
     observable.subscribe(() => {
@@ -91,7 +92,7 @@ export class FormularioUsuarioComponent implements OnInit {
     })
   }
 
-  voltar() {
+  voltar(): void {
     this.router.navigate([''])
   }
 }

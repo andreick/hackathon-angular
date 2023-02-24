@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
-import { Usuario } from '../service/interface/usuario';
-import { UsuarioService } from '../service/usuario.service';
+import { Usuario } from 'src/app/domain/usuario/usuario';
+import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 
 @Component({
   selector: 'app-lista-usuario',
@@ -33,14 +33,14 @@ export class ListaUsuarioComponent implements OnInit {
   }
 
   listarUsuarios(): void {
-    this.usuarioService.listarUsuarios().subscribe((usuarios) => this.usuarios = usuarios)
+    this.usuarioService.listar().subscribe((usuarios) => this.usuarios = usuarios)
   }
 
   excluirUsuario(usuario: Usuario): void {
     this.confirmationService.confirm({
       message: 'Tem certeza de que deseja excluir ' + usuario.nome + '?',
       accept: () => {
-        this.usuarioService.excluirUsuario(usuario.id).subscribe(() => {
+        this.usuarioService.excluir(usuario.id).subscribe(() => {
           this.listarUsuarios()
           this.messageService.add({ key: 'app', severity: 'success', summary: 'Sucesso', detail: 'Usuário Excluído', life: 2000 })
         })
