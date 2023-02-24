@@ -9,7 +9,7 @@ import { MenuItem } from 'primeng/api';
 export class AppComponent implements OnInit {
 
   title = 'hackathon-angular';
-  items: MenuItem[];
+  items!: MenuItem[];
 
   ngOnInit(): void {
     this.items = [{
