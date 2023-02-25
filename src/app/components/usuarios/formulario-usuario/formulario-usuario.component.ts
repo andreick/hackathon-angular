@@ -66,7 +66,7 @@ export class FormularioUsuarioComponent implements OnInit {
       acao = 'Cadastrado'
     }
     observable.subscribe(() => {
-      this.messageService.add({ key: 'app', severity: 'success', summary: 'Sucesso', detail: `Usuário ${acao}`, life: 2000 })
+      this.messageService.add({ key: 'shared', severity: 'success', summary: 'Sucesso', detail: `Usuário ${acao}`, life: 2000 })
       this.voltar()
     })
   }

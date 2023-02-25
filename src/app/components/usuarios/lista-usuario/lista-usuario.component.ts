@@ -47,7 +47,7 @@ export class ListaUsuarioComponent implements OnInit {
       accept: () => {
         this.usuarioService.excluir(usuario.id).subscribe(() => {
           this.listarUsuarios()
-          this.messageService.add({ key: 'app', severity: 'success', summary: 'Sucesso', detail: 'Usuário Excluído', life: 2000 })
+          this.messageService.add({ key: 'shared', severity: 'success', summary: 'Sucesso', detail: 'Usuário Excluído', life: 2000 })
         })
       }
     })
