@@ -7,13 +7,13 @@
             <div class="field col-12 md:col-6">
                 <label for="nome">Nome</label>
                 <input id="nome" type="text" formControlName="nome" pInputText />
-                <app-input-validation inputLabel="Nome" [abstractControl]="nome" [notBlank]="true"
+                <app-input-validation inputLabel="Nome" [control]="nome" [notBlank]="true"
                     [maxLength]="50"></app-input-validation>
             </div>
             <div class="field col-12 md:col-6">
                 <label for="email">Email</label>
                 <input id="email" type="email" formControlName="email" pInputText />
-                <app-input-validation inputLabel="Email" [abstractControl]="email" [notBlank]="true" [email]="true"
+                <app-input-validation inputLabel="Email" [control]="email" [notBlank]="true" [email]="true"
                     [minLength]="10"></app-input-validation>
             </div>
             <div class="field col-12 md:col-6">
@@ -27,13 +27,13 @@
             <div *ngIf="!id" class="field col-12 md:col-6">
                 <label for="login">Login</label>
                 <input id="login" type="text" formControlName="login" pInputText />
-                <app-input-validation inputLabel="Login" [abstractControl]="login" [notBlank]="true" [minLength]="5"
+                <app-input-validation inputLabel="Login" [control]="login" [notBlank]="true" [minLength]="5"
                     [maxLength]="20"></app-input-validation>
             </div>
             <div *ngIf="!id" class="field col-12 md:col-6">
                 <label for="senha">Senha</label>
                 <input id="senha" type="password" formControlName="senha" pInputText />
-                <app-input-validation inputLabel="Senha" [abstractControl]="senha" [notBlank]="true" [minLength]="4"
+                <app-input-validation inputLabel="Senha" [control]="senha" [notBlank]="true" [minLength]="4"
                     [maxLength]="10"></app-input-validation>
             </div>
         </form>

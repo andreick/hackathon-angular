@@ -8,8 +8,8 @@ import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@ang
 })
 export class InputValidationComponent implements OnInit {
 
+  @Input() control: AbstractControl | null = null
   @Input() inputLabel = 'Campo'
-  @Input('abstractControl') control: AbstractControl | null = null
 
   @Input() notBlank = false
   @Input() minLength = 0
