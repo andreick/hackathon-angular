@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ErrorToastComponent } from './error-toast.component';
 
 import { ToastModule } from 'primeng/toast';
+
+import { ErrorToastComponent } from './error-toast.component';
 
 @NgModule({
   declarations: [ErrorToastComponent],

@@ -5,19 +5,17 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
 
 import { ToastModule } from 'primeng/toast';
-import { TabMenuModule } from 'primeng/tabmenu';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
 import { GlobalHttpInterceptorService } from './service/interceptor/global-http-interceptor.service';
 import { ErrorToastModule } from './components/error-toast/error-toast.module';
+import { HeaderModule } from './components/header/header.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CabecalhoComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -25,8 +23,8 @@ import { ErrorToastModule } from './components/error-toast/error-toast.module';
     AppRoutingModule,
     HttpClientModule,
     ErrorToastModule,
+    HeaderModule,
     ToastModule,
-    TabMenuModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true }, MessageService, ConfirmationService],
   bootstrap: [AppComponent]

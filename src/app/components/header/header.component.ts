@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 @Component({
-  selector: 'app-cabecalho',
-  templateUrl: './cabecalho.component.html',
-  styleUrls: ['./cabecalho.component.css']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
-export class CabecalhoComponent implements OnInit {
+export class HeaderComponent implements OnInit {
 
   items!: MenuItem[]
 
