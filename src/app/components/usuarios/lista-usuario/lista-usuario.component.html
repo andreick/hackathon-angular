@@ -35,11 +35,4 @@
     </ng-template>
 </p-table>
 
-<p-confirmDialog header="Exclusão" icon="pi pi-exclamation-triangle" #cd>
-    <p-footer>
-        <button pButton label="Sim" icon="pi pi-check" class="p-button-text p-button-primary"
-            (click)="cd.accept()"></button>
-        <button pButton label="Não" icon="pi pi-times" class="p-button-text p-button-danger"
-            (click)="cd.reject()"></button>
-    </p-footer>
-</p-confirmDialog>
+<app-custom-confirm-dialog header="Exclusão"></app-custom-confirm-dialog>
