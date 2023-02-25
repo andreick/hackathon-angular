@@ -12,6 +12,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { ListaUsuarioComponent } from './lista-usuario/lista-usuario.component';
 import { FormularioUsuarioComponent } from './formulario-usuario/formulario-usuario.component';
+import { InputValidationModule } from '../input-validation/input-validation.module';
 
 @NgModule({
   declarations: [ListaUsuarioComponent, FormularioUsuarioComponent],
@@ -19,6 +20,7 @@ import { FormularioUsuarioComponent } from './formulario-usuario/formulario-usua
     CommonModule,
     UsuariosRoutingModule,
     ReactiveFormsModule,
+    InputValidationModule,
     TableModule,
     ButtonModule,
     CardModule,

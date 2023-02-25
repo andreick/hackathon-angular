@@ -7,21 +7,14 @@
             <div class="field col-12 md:col-6">
                 <label for="nome">Nome</label>
                 <input id="nome" type="text" formControlName="nome" pInputText />
-                <div *ngIf="isTouched(nome)">
-                    <small *ngIf="isBlank(nome)" class="p-invalid">Campo obrigatório</small>
-                    <small *ngIf="hasWrongLength(nome)" class="p-invalid">O nome deve possuir no máximo 50
-                        caracteres</small>
-                </div>
+                <app-input-validation inputLabel="Nome" [abstractControl]="nome" [notBlank]="true"
+                    [maxLength]="50"></app-input-validation>
             </div>
             <div class="field col-12 md:col-6">
                 <label for="email">Email</label>
                 <input id="email" type="email" formControlName="email" pInputText />
-                <div *ngIf="isTouched(email)">
-                    <small *ngIf="isBlank(email)" class="p-invalid">Campo obrigatório</small>
-                    <small *ngIf="isNotEmail(email)" class="p-invalid">Email inválido</small>
-                    <small *ngIf="hasWrongLength(email) && !isNotEmail(email)" class="p-invalid">O email deve possuir no
-                        mínimo 10 caracteres</small>
-                </div>
+                <app-input-validation inputLabel="Email" [abstractControl]="email" [notBlank]="true" [email]="true"
+                    [minLength]="10"></app-input-validation>
             </div>
             <div class="field col-12 md:col-6">
                 <label for="data-nascimento">Data de Nascimento</label>
@@ -34,20 +27,14 @@
             <div *ngIf="!id" class="field col-12 md:col-6">
                 <label for="login">Login</label>
                 <input id="login" type="text" formControlName="login" pInputText />
-                <div *ngIf="isTouched(login)">
-                    <small *ngIf="isBlank(login)" class="p-invalid">Campo obrigatório</small>
-                    <small *ngIf="hasWrongLength(login)" class="p-invalid">O login deve possuir entre 5 a 20
-                        caracteres</small>
-                </div>
+                <app-input-validation inputLabel="Login" [abstractControl]="login" [notBlank]="true" [minLength]="5"
+                    [maxLength]="20"></app-input-validation>
             </div>
             <div *ngIf="!id" class="field col-12 md:col-6">
                 <label for="senha">Senha</label>
                 <input id="senha" type="password" formControlName="senha" pInputText />
-                <div *ngIf="isTouched(senha)">
-                    <small *ngIf="isBlank(senha)" class="p-invalid">Campo obrigatório</small>
-                    <small *ngIf="hasWrongLength(senha)" class="p-invalid">A senha deve possuir entre 4 a 10
-                        caracteres</small>
-                </div>
+                <app-input-validation inputLabel="Senha" [abstractControl]="senha" [notBlank]="true" [minLength]="4"
+                    [maxLength]="10"></app-input-validation>
             </div>
         </form>
         <div class="flex justify-content-around">

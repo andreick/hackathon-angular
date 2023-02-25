@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { FormularioUsuario } from 'src/app/domain/usuario/formulario-usuario';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
-import { notBlankValidator } from 'src/app/validator/not-blank.validator';
 import { getYesterday } from 'src/app/utils/get-yesterday';
 
 import { MessageService } from 'primeng/api';
@@ -20,11 +19,6 @@ export class FormularioUsuarioComponent implements OnInit {
   id?: number
 
   formulario!: FormGroup
-  get nome() { return this.formulario.get('nome') }
-  get email() { return this.formulario.get('email') }
-  get dataNascimento() { return this.formulario.get('dataNascimento') }
-  get login() { return this.formulario.get('login') }
-  get senha() { return this.formulario.get('senha') }
 
   ontem: Date = getYesterday(new Date())
 
@@ -49,31 +43,16 @@ export class FormularioUsuarioComponent implements OnInit {
       })
     }
 
-    this.formulario = this.formBuilder.group({
-      nome: ['', Validators.compose([notBlankValidator(), Validators.maxLength(50)])],
-      email: ['', Validators.compose([notBlankValidator(), Validators.minLength(10), Validators.email])],
-      dataNascimento: [null],
-      login: ['', Validators.compose([notBlankValidator(), Validators.minLength(5), Validators.maxLength(20)])],
-      senha: ['', Validators.compose([notBlankValidator(), Validators.minLength(4), Validators.maxLength(10)])]
-    })
+    this.formulario = this.formBuilder.group(
+      { nome: [''], email: ['', { updateOn: 'blur' }], dataNascimento: [null], login: [''], senha: [''] }
+    )
   }
 
-  isTouched(control: AbstractControl | null): boolean | undefined {
-    return control?.touched
-  }
-
-  isBlank(control?: AbstractControl | null): boolean {
-    return control?.errors?.['notBlank']
-  }
-
-  hasWrongLength(control?: AbstractControl | null): boolean {
-    const errors = control?.errors
-    return errors?.['minlength'] || errors?.['maxlength']
-  }
-
-  isNotEmail(control?: AbstractControl | null): boolean {
-    return control?.errors?.['email']
-  }
+  get nome() { return this.formulario.get('nome') }
+  get email() { return this.formulario.get('email') }
+  get dataNascimento() { return this.formulario.get('dataNascimento') }
+  get login() { return this.formulario.get('login') }
+  get senha() { return this.formulario.get('senha') }
 
   enviar(): void {
     const formularioUsuario = this.formulario.value as FormularioUsuario
