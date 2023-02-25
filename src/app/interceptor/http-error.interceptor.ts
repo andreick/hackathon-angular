@@ -1,19 +1,17 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { GlobalToastService } from '../global-toast/global-toast.service';
+import { GlobalToastService } from '../service/global-toast/global-toast.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class GlobalHttpInterceptorService implements HttpInterceptor {
+@Injectable()
+export class HttpErrorInterceptor implements HttpInterceptor {
 
   constructor(private globalToastService: GlobalToastService) { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    return next.handle(request).pipe(
       catchError((error) => {
         console.error(error)
         if (error instanceof HttpErrorResponse) {

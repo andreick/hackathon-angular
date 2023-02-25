@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, Validators } from '@angular/forms';
+
+import { notBlankValidator } from './not-blank.validator';
 
 @Component({
   selector: 'app-input-validation',
@@ -20,7 +22,7 @@ export class InputValidationComponent implements OnInit {
 
   ngOnInit(): void {
     const validations = [
-      { enabled: this.notBlank, validator: this.notBlankValidator() },
+      { enabled: this.notBlank, validator: notBlankValidator() },
       { enabled: this.minLength > 0, validator: Validators.minLength(this.minLength) },
       { enabled: this.maxLength > 0, validator: Validators.maxLength(this.maxLength) },
       { enabled: this.email, validator: Validators.email }
@@ -56,12 +58,5 @@ export class InputValidationComponent implements OnInit {
 
   private getError(error: string): boolean {
     return this.control?.errors?.[error]
-  }
-
-  private notBlankValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const isBlank = (control.value || '').trim().length === 0
-      return isBlank ? { notBlank: true } : null
-    }
   }
 }

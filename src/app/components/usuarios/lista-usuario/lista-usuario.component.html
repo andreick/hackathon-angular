@@ -1,4 +1,5 @@
-<p-table [value]="usuarios" [rowHover]="true" styleClass="p-datatable-lg p-datatable-gridlines p-datatable-striped">
+<div *ng></div>
+<p-table [value]="usuarios" [loading]="loading" [rowHover]="true" styleClass="p-datatable-lg p-datatable-gridlines p-datatable-striped">
     <ng-template pTemplate="caption">
         <div class="flex justify-content-between">
             <div class="text-xl">Lista de Usuários</div>
@@ -31,6 +32,11 @@
                 <button pButton icon="pi pi-user-minus" class="p-button-rounded p-button-danger"
                     (click)="excluirUsuario(usuario)"></button>
             </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">Nenhum usuário encontrado.</td>
         </tr>
     </ng-template>
 </p-table>

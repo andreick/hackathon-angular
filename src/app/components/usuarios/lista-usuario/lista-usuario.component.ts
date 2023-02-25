@@ -15,6 +15,8 @@ export class ListaUsuarioComponent implements OnInit {
 
   usuarios: Usuario[] = []
 
+  loading = true
+
   colunas!: { cabecalho: string, campo: string }[]
 
   constructor(
@@ -35,7 +37,11 @@ export class ListaUsuarioComponent implements OnInit {
   }
 
   listarUsuarios(): void {
-    this.usuarioService.listar().subscribe((usuarios) => this.usuarios = usuarios)
+    this.loading = true
+    this.usuarioService.listar().subscribe((usuarios) => {
+      this.usuarios = usuarios
+      this.loading = false
+    })
   }
 
   pesquisarPorNome(event: Event): void {
