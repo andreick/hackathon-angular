@@ -6,25 +6,25 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
-import { ErrorComponent } from './components/error/error.component';
 
 import { ToastModule } from 'primeng/toast';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
 import { GlobalHttpInterceptorService } from './service/interceptor/global-http-interceptor.service';
+import { ErrorToastModule } from './components/error-toast/error-toast.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CabecalhoComponent,
-    ErrorComponent
+    CabecalhoComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    ErrorToastModule,
     ToastModule,
     TabMenuModule,
   ],

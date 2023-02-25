@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ErrorService {
+export class ErrorMessageService {
 
   private errorSubject = new Subject<string>()
 
@@ -13,7 +13,7 @@ export class ErrorService {
 
   get error() { return this.errorSubject.asObservable() }
 
-  public showError(error: HttpErrorResponse): void {
+  showError(error: HttpErrorResponse): void {
     let message: string
     switch (error.status) {
       case 0:
