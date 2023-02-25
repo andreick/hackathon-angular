@@ -7,7 +7,7 @@ import { first } from 'rxjs/operators';
 import { FormularioUsuario } from 'src/app/domain/usuario/formulario-usuario';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 import { GlobalToastService } from 'src/app/service/global-toast/global-toast.service';
-import { getYesterday } from 'src/app/utils/get-yesterday';
+import { getYesterday } from 'src/app/shared/get-yesterday';
 
 @Component({
   selector: 'app-formulario-usuario',
