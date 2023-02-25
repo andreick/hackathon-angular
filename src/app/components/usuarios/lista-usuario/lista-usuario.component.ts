@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { finalize } from 'rxjs/operators';
 
 import { ConfirmationService } from 'primeng/api';
 
@@ -13,11 +15,9 @@ import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 })
 export class ListaUsuarioComponent implements OnInit {
 
-  usuarios: Usuario[] = []
+  usuarios$!: Observable<Usuario[]>
 
   loading = true
-
-  colunas!: { cabecalho: string, campo: string }[]
 
   constructor(
     private usuarioService: UsuarioService,
@@ -27,26 +27,19 @@ export class ListaUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarUsuarios()
-
-    this.colunas = [
-      { cabecalho: 'Id', campo: 'id' },
-      { cabecalho: 'Nome', campo: 'nome' },
-      { cabecalho: 'Email', campo: 'email' },
-      { cabecalho: 'Data de Nascimento', campo: 'dataNascimento' }
-    ];
   }
 
   listarUsuarios(): void {
     this.loading = true
-    this.usuarioService.listar().subscribe((usuarios) => {
-      this.usuarios = usuarios
-      this.loading = false
-    })
+    this.usuarios$ = this.usuarioService.listar()
+      .pipe(
+        finalize(() => this.loading = false)
+      )
   }
 
   pesquisarPorNome(event: Event): void {
     const value = (event.target as HTMLInputElement).value
-    this.usuarioService.buscarPorNome(value).subscribe((usuarios) => this.usuarios = usuarios)
+    this.usuarios$ = this.usuarioService.buscarPorNome(value)
   }
 
   excluirUsuario(usuario: Usuario): void {

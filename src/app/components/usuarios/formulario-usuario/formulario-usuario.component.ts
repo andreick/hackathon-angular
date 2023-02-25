@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 import { FormularioUsuario } from 'src/app/domain/usuario/formulario-usuario';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
@@ -33,13 +34,15 @@ export class FormularioUsuarioComponent implements OnInit {
     const idParam = this.route.snapshot.paramMap.get('id')
     if (idParam) {
       this.id = Number(idParam)
-      this.usuarioService.buscarPorId(this.id).subscribe((usuario) => {
-        this.nome?.setValue(usuario.nome)
-        this.email?.setValue(usuario.email)
-        this.dataNascimento?.setValue(new Date(usuario.dataNascimento))
-        this.formulario.removeControl('login')
-        this.formulario.removeControl('senha')
-      })
+      this.usuarioService.buscarPorId(this.id)
+        .pipe(first())
+        .subscribe((usuario) => {
+          this.nome?.setValue(usuario.nome)
+          this.email?.setValue(usuario.email)
+          this.dataNascimento?.setValue(new Date(usuario.dataNascimento))
+          this.formulario.removeControl('login')
+          this.formulario.removeControl('senha')
+        })
     }
 
     this.formulario = this.formBuilder.group(
