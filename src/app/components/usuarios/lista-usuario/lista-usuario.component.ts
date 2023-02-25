@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService, ConfirmationService } from 'primeng/api';
+
+import { ConfirmationService } from 'primeng/api';
 
 import { Usuario } from 'src/app/domain/usuario/usuario';
+import { GlobalToastService } from 'src/app/service/global-toast/global-toast.service';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 
 @Component({
@@ -17,7 +19,7 @@ export class ListaUsuarioComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private messageService: MessageService,
+    private globalToastService: GlobalToastService,
     private confirmationService: ConfirmationService
   ) { }
 
@@ -47,7 +49,7 @@ export class ListaUsuarioComponent implements OnInit {
       accept: () => {
         this.usuarioService.excluir(usuario.id).subscribe(() => {
           this.listarUsuarios()
-          this.messageService.add({ key: 'shared', severity: 'success', summary: 'Sucesso', detail: 'Usuário Excluído', life: 2000 })
+          this.globalToastService.showSuccess('Usuário Excluído')
         })
       }
     })

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { FormularioUsuario } from 'src/app/domain/usuario/formulario-usuario';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
+import { GlobalToastService } from 'src/app/service/global-toast/global-toast.service';
 import { getYesterday } from 'src/app/utils/get-yesterday';
-
-import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-formulario-usuario',
@@ -27,7 +26,7 @@ export class FormularioUsuarioComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private usuarioService: UsuarioService,
-    private messageService: MessageService
+    private globalToast: GlobalToastService
   ) { }
 
   ngOnInit(): void {
@@ -66,7 +65,7 @@ export class FormularioUsuarioComponent implements OnInit {
       acao = 'Cadastrado'
     }
     observable.subscribe(() => {
-      this.messageService.add({ key: 'shared', severity: 'success', summary: 'Sucesso', detail: `Usuário ${acao}`, life: 2000 })
+      this.globalToast.showSuccess(`Usuário ${acao}`)
       this.voltar()
     })
   }

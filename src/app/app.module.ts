@@ -6,11 +6,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { MessageService, ConfirmationService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 
 import { GlobalHttpInterceptorService } from './service/interceptor/global-http-interceptor.service';
-import { SharedToastModule } from './components/shared-toast/shared-toast.module';
-import { ErrorToastModule } from './components/error-toast/error-toast.module';
+import { GlobalToastModule } from './components/global-toast/global-toast.module';
 import { HeaderModule } from './components/header/header.module';
 
 @NgModule({
@@ -22,11 +21,10 @@ import { HeaderModule } from './components/header/header.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedToastModule,
-    ErrorToastModule,
+    GlobalToastModule,
     HeaderModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true }, MessageService, ConfirmationService],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true }, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
