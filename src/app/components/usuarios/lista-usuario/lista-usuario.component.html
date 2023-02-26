@@ -1,11 +1,13 @@
-<p-table [value]="usuarios" [rowHover]="true" styleClass="p-datatable-lg p-datatable-gridlines p-datatable-striped">
+<div *ng></div>
+<p-table [value]="(usuarios$ | async) || []" [loading]="loading" [rowHover]="true"
+    styleClass="p-datatable-lg p-datatable-gridlines p-datatable-striped">
     <ng-template pTemplate="caption">
-        <div class="flex justify-content-between">
+        <div class="p-d-flex p-jc-between">
             <div class="text-xl">Lista de Usuários</div>
-            <div class="flex gap-3">
+            <div class="p-d-flex gap-3">
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" placeholder="Pesquisar..." (keyup)="pesquisarPorNome($event)" />
+                    <input pInputText type="text" placeholder="Pesquisar Nome..." (keyup)="pesquisarPorNome($event)" />
                 </span>
                 <button pButton label="Cadastrar" icon="pi pi-user-plus" class="p-button-success"
                     routerLink="cadastrar"></button>
@@ -14,18 +16,20 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th *ngFor="let col of colunas">
-                {{col.cabecalho}}
-            </th>
-            <th class="text-center">Ações</th>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data de Nascimento</th>
+            <th class="p-text-center">Ações</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-usuario>
         <tr>
-            <td *ngFor="let col of colunas">
-                {{usuario[col.campo]}}
-            </td>
-            <td class="flex justify-content-center gap-3">
+            <td>{{usuario.id}}</td>
+            <td>{{usuario.nome}}</td>
+            <td>{{usuario.email}}</td>
+            <td>{{usuario.dataNascimento | date: 'dd/MM/yyyy'}}</td>
+            <td class="p-d-flex p-jc-center gap-3">
                 <button pButton icon="pi pi-user-edit" class="p-button-rounded p-button-success"
                     routerLink="atualizar/{{usuario.id}}"></button>
                 <button pButton icon="pi pi-user-minus" class="p-button-rounded p-button-danger"
@@ -33,13 +37,11 @@
             </td>
         </tr>
     </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="5">Nenhum usuário encontrado.</td>
+        </tr>
+    </ng-template>
 </p-table>
 
-<p-confirmDialog header="Exclusão" icon="pi pi-exclamation-triangle" #cd>
-    <p-footer>
-        <button pButton label="Sim" icon="pi pi-check" class="p-button-text p-button-primary"
-            (click)="cd.accept()"></button>
-        <button pButton label="Não" icon="pi pi-times" class="p-button-text p-button-danger"
-            (click)="cd.reject()"></button>
-    </p-footer>
-</p-confirmDialog>
+<app-custom-confirm-dialog header="Exclusão"></app-custom-confirm-dialog>

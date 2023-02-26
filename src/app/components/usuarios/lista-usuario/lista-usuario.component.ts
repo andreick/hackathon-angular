@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService, ConfirmationService } from 'primeng/api';
+import { Observable } from 'rxjs/internal/Observable';
+import { finalize } from 'rxjs/operators';
+
+import { ConfirmationService } from 'primeng/api';
 
 import { Usuario } from 'src/app/domain/usuario/usuario';
+import { GlobalToastService } from 'src/app/service/global-toast/global-toast.service';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 
 @Component({
@@ -11,34 +15,31 @@ import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 })
 export class ListaUsuarioComponent implements OnInit {
 
-  usuarios: Usuario[] = []
+  usuarios$!: Observable<Usuario[]>
 
-  colunas!: { cabecalho: string, campo: string }[]
+  loading = true
 
   constructor(
     private usuarioService: UsuarioService,
-    private messageService: MessageService,
+    private globalToastService: GlobalToastService,
     private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
     this.listarUsuarios()
-
-    this.colunas = [
-      { cabecalho: 'Id', campo: 'id' },
-      { cabecalho: 'Nome', campo: 'nome' },
-      { cabecalho: 'Email', campo: 'email' },
-      { cabecalho: 'Data de Nascimento', campo: 'dataNascimento' }
-    ];
   }
 
   listarUsuarios(): void {
-    this.usuarioService.listar().subscribe((usuarios) => this.usuarios = usuarios)
+    this.loading = true
+    this.usuarios$ = this.usuarioService.listar()
+      .pipe(
+        finalize(() => this.loading = false)
+      )
   }
 
   pesquisarPorNome(event: Event): void {
     const value = (event.target as HTMLInputElement).value
-    this.usuarioService.buscarPorNome(value).subscribe((usuarios) => this.usuarios = usuarios)
+    this.usuarios$ = this.usuarioService.buscarPorNome(value)
   }
 
   excluirUsuario(usuario: Usuario): void {
@@ -47,7 +48,7 @@ export class ListaUsuarioComponent implements OnInit {
       accept: () => {
         this.usuarioService.excluir(usuario.id).subscribe(() => {
           this.listarUsuarios()
-          this.messageService.add({ key: 'app', severity: 'success', summary: 'Sucesso', detail: 'Usuário Excluído', life: 2000 })
+          this.globalToastService.showSuccess('Usuário Excluído')
         })
       }
     })

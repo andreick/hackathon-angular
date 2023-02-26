@@ -1,56 +1,43 @@
-<div class="flex justify-content-center">
-    <p-card class="w-12 md:11 lg:w-9 xl:w-8">
-        <div class="flex justify-content-center">
-            <div class="text-3xl mb-2">Usuário</div>
+<div class="p-d-flex p-jc-center">
+    <p-card class="p-col-12 p-md-10 p-lg-8 p-xl-6">
+        <div class="p-d-flex p-jc-center">
+            <div class="text-3xl p-mb-3">Usuário</div>
         </div>
-        <form [formGroup]="formulario" class="p-fluid grid my-3">
-            <div class="field col-12 md:col-6">
+        <form [formGroup]="formulario" class="p-fluid p-formgrid p-grid p-my-3">
+            <div class="p-field p-col-12 p-md-6">
                 <label for="nome">Nome</label>
                 <input id="nome" type="text" formControlName="nome" pInputText />
-                <div *ngIf="isTouched(nome)">
-                    <small *ngIf="isBlank(nome)" class="p-invalid">Campo obrigatório</small>
-                    <small *ngIf="hasWrongLength(nome)" class="p-invalid">O nome deve possuir no máximo 50
-                        caracteres</small>
-                </div>
+                <app-input-validation inputLabel="Nome" [control]="nome" [notBlank]="true"
+                    [maxLength]="50"></app-input-validation>
             </div>
-            <div class="field col-12 md:col-6">
+            <div class="p-field p-col-12 p-md-6">
                 <label for="email">Email</label>
                 <input id="email" type="email" formControlName="email" pInputText />
-                <div *ngIf="isTouched(email)">
-                    <small *ngIf="isBlank(email)" class="p-invalid">Campo obrigatório</small>
-                    <small *ngIf="isNotEmail(email)" class="p-invalid">Email inválido</small>
-                    <small *ngIf="hasWrongLength(email) && !isNotEmail(email)" class="p-invalid">O email deve possuir no
-                        mínimo 10 caracteres</small>
-                </div>
+                <app-input-validation inputLabel="Email" [control]="email" [notBlank]="true" [email]="true"
+                    [minLength]="10"></app-input-validation>
             </div>
-            <div class="field col-12 md:col-6">
+            <div class="p-field p-col-12 p-md-6">
                 <label for="data-nascimento">Data de Nascimento</label>
                 <p-calendar id="data-nascimento" formControlName="dataNascimento" dateFormat="dd/mm/yy"
                     [yearNavigator]="true" [monthNavigator]="true" [showIcon]="true" yearRange="1900:2030"
                     [maxDate]="ontem"></p-calendar>
             </div>
-            <div class="field col-12 md:col-6">
+            <div class="p-field p-col-12 p-md-6">
             </div>
-            <div *ngIf="!id" class="field col-12 md:col-6">
+            <div *ngIf="!id" class="p-field p-col-12 p-md-6">
                 <label for="login">Login</label>
                 <input id="login" type="text" formControlName="login" pInputText />
-                <div *ngIf="isTouched(login)">
-                    <small *ngIf="isBlank(login)" class="p-invalid">Campo obrigatório</small>
-                    <small *ngIf="hasWrongLength(login)" class="p-invalid">O login deve possuir entre 5 a 20
-                        caracteres</small>
-                </div>
+                <app-input-validation inputLabel="Login" [control]="login" [notBlank]="true" [minLength]="5"
+                    [maxLength]="20"></app-input-validation>
             </div>
-            <div *ngIf="!id" class="field col-12 md:col-6">
+            <div *ngIf="!id" class="p-field p-col-12 p-md-6">
                 <label for="senha">Senha</label>
                 <input id="senha" type="password" formControlName="senha" pInputText />
-                <div *ngIf="isTouched(senha)">
-                    <small *ngIf="isBlank(senha)" class="p-invalid">Campo obrigatório</small>
-                    <small *ngIf="hasWrongLength(senha)" class="p-invalid">A senha deve possuir entre 4 a 10
-                        caracteres</small>
-                </div>
+                <app-input-validation inputLabel="Senha" [control]="senha" [notBlank]="true" [minLength]="4"
+                    [maxLength]="10"></app-input-validation>
             </div>
         </form>
-        <div class="flex justify-content-around">
+        <div class="p-d-flex p-jc-around">
             <button pButton label="Salvar" icon="pi pi-check" class="p-button-text p-button-primary" (click)="enviar()"
                 [disabled]="!formulario.valid"></button>
             <button pButton label="Cancelar" icon="pi pi-times" class="p-button-text p-button-danger"

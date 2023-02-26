@@ -3,32 +3,28 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { ConfirmationService } from 'primeng/api';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CabecalhoComponent } from './components/cabecalho/cabecalho.component';
-import { ErrorComponent } from './components/error/error.component';
+import { GlobalToastModule } from './components/global-toast/global-toast.module';
+import { HeaderModule } from './components/header/header.module';
 
-import { ToastModule } from 'primeng/toast';
-import { TabMenuModule } from 'primeng/tabmenu';
-import { MessageService, ConfirmationService } from 'primeng/api';
-
-import { GlobalHttpInterceptorService } from './service/interceptor/global-http-interceptor.service';
+import { HttpErrorInterceptor } from './interceptor/http-error.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CabecalhoComponent,
-    ErrorComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    ToastModule,
-    TabMenuModule,
+    GlobalToastModule,
+    HeaderModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true }, MessageService, ConfirmationService],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

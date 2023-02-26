@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CabecalhoComponent } from './cabecalho.component';
+import { GlobalToastComponent } from './global-toast.component';
 
-describe('CabecalhoComponent', () => {
-  let component: CabecalhoComponent;
-  let fixture: ComponentFixture<CabecalhoComponent>;
+describe('GlobalToastComponent', () => {
+  let component: GlobalToastComponent;
+  let fixture: ComponentFixture<GlobalToastComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CabecalhoComponent ]
+      declarations: [ GlobalToastComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CabecalhoComponent);
+    fixture = TestBed.createComponent(GlobalToastComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

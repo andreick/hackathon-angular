@@ -1,0 +1,10 @@
+<div *ngIf="isTouched()">
+    <small class="p-invalid" *ngIf="isBlank()">Campo obrigatório.</small>
+    <small class="p-invalid" *ngIf="isNotEmail()">Email inválido.</small>
+    <small class="p-invalid" *ngIf="hasSmallLength()">
+        {{inputLabel}} deve possuir no mínimo {{minLength}} caracteres.
+    </small>
+    <small class="p-invalid" *ngIf="hasBigLength()">
+        {{inputLabel}} deve possuir no máximo {{maxLength}} caracteres.
+    </small>
+</div>

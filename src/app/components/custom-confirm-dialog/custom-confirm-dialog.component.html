@@ -1,0 +1,8 @@
+<p-confirmDialog #cd [header]="header" [icon]="icon">
+    <p-footer>
+        <button pButton label="Sim" icon="pi pi-check" class="p-button-text p-button-primary"
+            (click)="cd.accept()"></button>
+        <button pButton label="Não" icon="pi pi-times" class="p-button-text p-button-danger"
+            (click)="cd.reject()"></button>
+    </p-footer>
+</p-confirmDialog>
