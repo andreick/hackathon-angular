@@ -2,9 +2,9 @@
 <p-table [value]="(usuarios$ | async) || []" [loading]="loading" [rowHover]="true"
     styleClass="p-datatable-lg p-datatable-gridlines p-datatable-striped">
     <ng-template pTemplate="caption">
-        <div class="flex justify-content-between">
+        <div class="p-d-flex p-jc-between">
             <div class="text-xl">Lista de Usuários</div>
-            <div class="flex gap-3">
+            <div class="p-d-flex gap-3">
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" placeholder="Pesquisar Nome..." (keyup)="pesquisarPorNome($event)" />
@@ -20,7 +20,7 @@
             <th>Nome</th>
             <th>Email</th>
             <th>Data de Nascimento</th>
-            <th class="text-center">Ações</th>
+            <th class="p-text-center">Ações</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-usuario>
@@ -29,7 +29,7 @@
             <td>{{usuario.nome}}</td>
             <td>{{usuario.email}}</td>
             <td>{{usuario.dataNascimento | date: 'dd/MM/yyyy'}}</td>
-            <td class="flex justify-content-center gap-3">
+            <td class="p-d-flex p-jc-center gap-3">
                 <button pButton icon="pi pi-user-edit" class="p-button-rounded p-button-success"
                     routerLink="atualizar/{{usuario.id}}"></button>
                 <button pButton icon="pi pi-user-minus" class="p-button-rounded p-button-danger"

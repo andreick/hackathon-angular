@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+.gap-1 {
+    gap: 0.25rem;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.gap-3 {
+    gap: 1rem;
+}
+
+.gap-4 {
+    gap: 1.5rem;
+}
+
+.gap-5 {
+    gap: 2rem;
+}
+
+.gap-6 {
+    gap: 3rem;
+}
+
+.text-xl {
+    font-size: 1.25rem;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+}
+
+.text-3xl {
+    font-size: 1.75rem;
+}
+
+.text-4xl {
+    font-size: 2rem;
+}
+
+.text-5xl {
+    font-size: 2.5rem;
+}
+
+.text-6xl {
+    font-size: 3rem;
+}
