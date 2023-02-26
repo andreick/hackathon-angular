@@ -21,6 +21,9 @@ export class GlobalToastService {
       case 0:
         message = 'Falha na conexão com o servidor'
         break;
+      case 401:
+        message = 'Usuário ou senha inválidos'
+        break
       case 500:
         message = 'Ocorreu um erro interno no servidor'
         break

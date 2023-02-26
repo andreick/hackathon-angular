@@ -1,0 +1,25 @@
+<div class="p-d-flex p-jc-center">
+    <p-card class="p-col-12 p-md-10 p-lg-8 p-xl-6">
+        <div class="p-d-flex p-jc-center">
+            <div class="text-3xl p-mb-3">Login</div>
+        </div>
+        <form [formGroup]="form" class="p-fluid p-formgrid p-grid p-my-3">
+            <div class="p-field p-col-12 p-md-6">
+                <label for="login">Login</label>
+                <input id="login" type="text" formControlName="login" pInputText />
+                <app-input-validation inputLabel="Login" [control]="login" [notBlank]="true" [minLength]="5"
+                    [maxLength]="20"></app-input-validation>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+                <label for="senha">Senha</label>
+                <input id="senha" type="password" formControlName="senha" pInputText />
+                <app-input-validation inputLabel="Senha" [control]="senha" [notBlank]="true" [minLength]="4"
+                    [maxLength]="10"></app-input-validation>
+            </div>
+        </form>
+        <div class="p-d-flex p-jc-around">
+            <button pButton label="Entrar" icon="pi pi-check" class="p-button-text p-button-primary" (click)="submit()"
+                [disabled]="!form.valid"></button>
+        </div>
+    </p-card>
+</div>
